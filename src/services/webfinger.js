@@ -16,6 +16,8 @@ let finger = (acct) => {
     }).then((response) => {
       console.log('[WEBFINGER] Response:', response)
       resolve(response)
+    }).catch((err) => {
+      reject(err)
     })
   })
 }
@@ -29,6 +31,8 @@ let discoverActor = (acct) => {
         if (link.type === 'application/activity+json')
           resolve(link.href)
       })
+
+      reject('no ActivityPub actor found!')
     }).catch((err) => {
       reject(err)
     })
