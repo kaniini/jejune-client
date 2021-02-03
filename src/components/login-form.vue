@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import WebfingerService from '@/services/webfinger'
+import ToplevelService from '@/services/toplevel'
 
 export default {
   name: 'LoginForm',
@@ -28,10 +28,11 @@ export default {
   }),
   methods: {
     submit() {
-      WebfingerService.discoverActor(this.username).then((result) => {
-        console.log('Webfingered', this.username, 'as', result)
+      ToplevelService.login(this.username, this.password).then((actor) => {
+        this.$root.actor = actor
+        this.$router.push('/.well-known/jejune')
       }).catch((err) => {
-        console.log('Webfinger error:', err)
+        console.log('Login error:', err)
         this.authError = err
       })
     }

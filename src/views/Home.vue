@@ -9,8 +9,7 @@
 export default {
   name: 'Home',
   mounted() {
-    console.log(this)
-    if (!this.$.jejune_token)
+    if (!this.$root.actor)
       this.$router.push('/.well-known/jejune/login')
   }
 }

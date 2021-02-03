@@ -24,3 +24,14 @@
   color: #42b983;
 }
 </style>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      actor: null
+    }
+  }
+}
+</script>
