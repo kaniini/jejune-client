@@ -7,7 +7,12 @@
 .icon-user:before { content: '\e805'; } /* '' */
 .icon-retweet:before { content: '\e806'; } /* '' */
 .icon-home:before { content: '\e807'; } /* '' */
+.icon-font:before { content: '\e808'; } /* '' */
+.icon-camera:before { content: '\e809'; } /* '' */
+.icon-videocam:before { content: '\e80a'; } /* '' */
+.icon-volume-up:before { content: '\e80b'; } /* '' */
 .icon-mail-alt:before { content: '\f0e0'; } /* '' */
 .icon-bell-alt:before { content: '\f0f3'; } /* '' */
+.icon-quote-left:before { content: '\f10d'; } /* '' */
 .icon-user-plus:before { content: '\f234'; } /* '' */
 .icon-user-times:before { content: '\f235'; } /* '' */
