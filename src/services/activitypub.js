@@ -21,6 +21,8 @@ Actor.prototype.oAuthEndpoints = function () {
   return obj
 }
 
+var ACTOR_CACHE = {}
+
 let fetchActor = (uri) => {
   return new Promise((resolve, reject) => {
     fetch(uri, {
@@ -28,7 +30,8 @@ let fetchActor = (uri) => {
     }).then((response) => {
       return response.json()
     }).then((response) => {
-      resolve(new Actor(response))
+      ACTOR_CACHE[uri] = new Actor(response)
+      resolve(ACTOR_CACHE[uri])
     }).catch((err) => {
       reject(err)
     })
