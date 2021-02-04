@@ -7,8 +7,8 @@
     </div>
 
     <div class="activity-content">
-      <div class="activity-header">
-        <span class="activity-author" v-if="actor">
+      <div class="activity-header" v-if="actor">
+        <span class="activity-author">
           <a :href="actor.data.url" target="_blank">{{ actor.data.name }}</a>
         </span>
 

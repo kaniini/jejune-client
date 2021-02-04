@@ -19,7 +19,10 @@ export default {
       return
 
     this.actor.fetchInbox().then((activities) => {
-      this.activities = activities.orderedItems
+      this.activities = activities.orderedItems.filter((activity) => {
+        if (['Create', 'Announce'].indexOf(activity.type) != -1)
+          return true;
+      })
     }).catch((err) => {
       console.log('error:', err)
     })
