@@ -21,7 +21,7 @@ Actor.prototype.fetchMailboxWithToken = function (mailbox_uri) {
     fetch(mailbox_uri, {
       headers: {
         'Accept': 'application/activity+json',
-        'Authentication': `Bearer ${this.token.access_token}`
+        'Authorization': `Bearer ${this.token.access_token}`
       }
     }).then((response) => {
       return response.json()
