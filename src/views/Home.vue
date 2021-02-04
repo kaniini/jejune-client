@@ -1,13 +1,15 @@
 <template>
   <div class="dashboard">
-    <h1>hi there</h1>
+    <InboxCollection :actor="$root.actor" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import InboxCollection from '@/components/inbox-collection'
+
 export default {
   name: 'Home',
+  components: { InboxCollection },
   mounted() {
     if (!this.$root.actor)
       this.$router.push('/.well-known/jejune/login')
@@ -17,6 +19,7 @@ export default {
 
 <style>
 .dashboard {
+   padding: 1em;
    max-width: 1200px;
    margin: auto;
 }
