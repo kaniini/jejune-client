@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <div class="dashboard">
+    <h1>hi there</h1>
   </div>
 </template>
 
@@ -13,3 +14,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.dashboard {
+   max-width: 1200px;
+   margin: auto;
+}
+</style>
