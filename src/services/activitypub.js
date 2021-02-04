@@ -2,6 +2,50 @@ function Actor(data) {
   this.data = data
 }
 
+Actor.prototype.inboxURL = function () {
+  if (this.data.inbox)
+    return this.data.inbox
+
+  return null
+}
+
+Actor.prototype.iconURL = function () {
+  if (this.data.icon && this.data.icon.url)
+    return this.data.icon.url
+
+  return null
+}
+
+Actor.prototype.fetchMailboxWithToken = function (mailbox_uri) {
+  return new Promise((resolve, reject) => {
+    fetch(mailbox_uri, {
+      headers: {
+        'Accept': 'application/activity+json',
+        'Authentication': `Bearer ${this.token.access_token}`
+      }
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+Actor.prototype.fetchInbox = function () {
+  return new Promise((resolve, reject) => {
+    if (!this.token)
+      reject('no token for fetching inbox')
+
+    this.fetchMailboxWithToken(this.inboxURL()).then((result) => {
+      resolve(result)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 Actor.prototype.setToken = function (token) {
   this.token = token
 }
