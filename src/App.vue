@@ -8,9 +8,6 @@ body {
   background: #15191e;
   color: #eeeeee;
   margin: 0;
-}
-
-#app {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,6 +16,7 @@ body {
 nav {
   padding: 1em;
   background: #30304e;
+  clear: both;
 }
 
 nav a {
@@ -37,6 +35,17 @@ nav a.router-link-exact-active {
 
 .left-nav li {
   padding-right: 1em;
+  display: table-cell;
+}
+
+.right-nav {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+.right-nav li {
+  padding-left: 1em;
   display: table-cell;
 }
 </style>
