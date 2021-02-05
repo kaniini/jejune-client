@@ -27,7 +27,17 @@
 
       <activity :activity="in_reply_to" v-if="in_reply_to" />
 
-      <div v-html="child.content" class="activity-payload" />
+      <div class="activity-payload">
+        <div class="activity-attachments" v-if="child.attachment">
+          <div v-for="attachment in child.attachment" v-bind:key="attachment.url" class="attachment">
+            <Attachment :attachment="attachment" />
+          </div>
+        </div>
+
+        <h2 v-html="child.name" v-if="child.name" />
+        <h3 v-html="child.summary" v-if="child.summary" />
+        <div v-html="child.content" v-if="child.content" />
+      </div>
 
       <div class="activity-footer">
         <div class="activity-reactions">
@@ -47,10 +57,14 @@
 
 <script>
 import ActivityPubService from '@/services/activitypub'
+import Attachment from '@/components/attachment'
 
 export default {
   name: 'Activity',
   props: ['activity'],
+  components: {
+    Attachment,
+  },
   data() {
     return {
       type: this.activity.type,
@@ -156,5 +170,32 @@ export default {
 
 .activity-payload a:hover {
   text-decoration: underline;
+}
+
+.activity-attachments {
+  margin: -0.5em;
+  margin-bottom: 0.5em;
+  display: flex;
+}
+
+.attachment img, .attachment video, .attachment audio {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.attachment {
+  flex: 1;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.attachment:first-child {
+  margin-left: 0;
+}
+
+.attachment:last-child {
+  margin-right: 0;
 }
 </style>
