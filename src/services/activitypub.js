@@ -16,6 +16,28 @@ Actor.prototype.iconURL = function () {
   return null
 }
 
+Actor.prototype.pushMessageToOutbox = function (message) {
+  return new Promise((resolve, reject) => {
+    let outbox_uri = this.data.outbox
+
+    fetch(outbox_uri, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/activity+json',
+        'Authorization': `Bearer ${this.token.access_token}`,
+        'Content-Type': 'application/activity+json',
+      },
+      body: JSON.stringify(message),
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 Actor.prototype.fetchMailboxWithToken = function (mailbox_uri) {
   return new Promise((resolve, reject) => {
     fetch(mailbox_uri, {

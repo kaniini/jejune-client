@@ -6,22 +6,22 @@
 
     <div class="composer-container">
       <div class="composer-post-types">
-        <div class="composer-post-type">
+        <div class="composer-post-type" v-on:click="openComposerModal('text')">
           <i class="composer-icon icon-font"></i><br>
           Text
         </div>
 
-        <div class="composer-post-type">
+        <div class="composer-post-type" v-on:click="openComposerModal('image')">
           <i class="composer-icon icon-camera"></i><br>
           Image
         </div>
 
-        <div class="composer-post-type">
+        <div class="composer-post-type" v-on:click="openComposerModal('video')">
           <i class="composer-icon icon-videocam"></i><br>
           Video
         </div>
 
-        <div class="composer-post-type">
+        <div class="composer-post-type" v-on:click="openComposerModal('audio')">
           <i class="composer-icon icon-volume-up"></i><br>
           Audio
         </div>
@@ -33,6 +33,11 @@
 <script>
 export default {
   name: 'Composer',
+  methods: {
+    openComposerModal(type) {
+      this.$root.showComposerModal = type
+    }
+  },
 }
 </script>
 

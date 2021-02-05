@@ -1,4 +1,5 @@
 <template>
+  <ComposerModal v-if="showComposerModal" />
   <NavBar v-if="actor" />
   <router-view/>
 </template>
@@ -52,13 +53,15 @@ nav a.router-link-exact-active {
 
 <script>
 import NavBar from '@/components/nav-bar.vue'
+import ComposerModal from '@/components/composer-modal.vue'
 
 export default {
   name: 'App',
-  components: { NavBar },
+  components: { NavBar, ComposerModal },
   data() {
     return {
-      actor: null
+      actor: null,
+      showComposerModal: null,
     }
   }
 }
