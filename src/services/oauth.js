@@ -35,6 +35,9 @@ let authorizeWithPassword = (actor, app_token, username, password) => {
       method: 'POST',
       body: data
     }).then((response) => {
+      if (!response.ok)
+        reject('Unable to acquire an OAuth session token with the supplied credentials.')
+
       return response.json()
     }).then((response) => {
       resolve(response)

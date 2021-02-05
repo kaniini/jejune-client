@@ -82,9 +82,12 @@ export default {
     font-size: 1.25em;
 }
 
-.auth-error {
+.login-error {
     background: rgba(255, 180, 180, 0.5);
     color: #eeeeee;
     border-radius: 4px;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    text-align: center;
 }
 </style>
