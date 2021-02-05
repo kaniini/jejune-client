@@ -198,4 +198,8 @@ export default {
 .attachment:last-child {
   margin-right: 0;
 }
+
+.activity-payload * {
+  max-width: 100%;
+}
 </style>
