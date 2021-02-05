@@ -1,19 +1,25 @@
 <template>
-  <form v-on:submit.prevent="submit(user)">
-    <h2>Jejune</h2>
+  <div class="login-form-container">
+    <form v-on:submit.prevent="submit(user)" class="login-form">
+      <h2>Jejune</h2>
 
-    <div class="form-input">
-      <label for="username">Username</label>
-      <input id="username" v-model="username" type="text">
-    </div>
+      <div class="login-error" v-if="authError">
+        {{ authError }}
+      </div>
 
-    <div class="form-input">
-      <label for="password">Password</label>
-      <input id="password" v-model="password" type="password">
-    </div>
+      <div class="form-input">
+        <label for="username">Username</label>
+        <input id="username" v-model="username" type="text">
+      </div>
 
-    <button type="submit" id="login">Log In</button>
-  </form>
+      <div class="form-input">
+        <label for="password">Password</label>
+        <input id="password" v-model="password" type="password">
+      </div>
+
+      <button type="submit" id="login">Log In</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -39,3 +45,46 @@ export default {
   }
 }
 </script>
+
+<style>
+.login-form-container {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-form {
+    flex: 1;
+    max-width: 600px;
+    margin: auto;
+    background: rgba(180, 180, 255, 0.25);
+    border-radius: 4px;
+    padding: 1em;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.form-input input {
+    background: rgba(180, 180, 255, 0.5);
+    border: 0;
+    border-bottom: 2px solid #dddddd;
+    color: #eeeeee;
+    font-size: 1.25em;
+}
+
+.auth-error {
+    background: rgba(255, 180, 180, 0.5);
+    color: #eeeeee;
+    border-radius: 4px;
+}
+</style>
