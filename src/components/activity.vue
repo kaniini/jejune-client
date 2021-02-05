@@ -25,6 +25,8 @@
         </span>
       </div>
 
+      <activity :activity="in_reply_to" v-if="in_reply_to" />
+
       <div v-html="child.content" class="activity-payload" />
 
       <div class="activity-footer">
@@ -55,6 +57,7 @@ export default {
       child: this.activity.object,
       actor: null,
       child_actor: null,
+      in_reply_to: null,
       interactions: 0, // XXX
     }
   },
@@ -66,6 +69,15 @@ export default {
     if (this.child && this.child.attributedTo)
       ActivityPubService.fetchActor(this.child.attributedTo).then((actor) => {
         this.child_actor = actor
+      })
+
+    // fetching children seems to only work with some platforms, but notably not Mastodon,
+    // so turn it off for now
+    let fetch_children = false
+    if (fetch_children && this.child && this.child.inReplyTo)
+      ActivityPubService.fetchObject(this.child.inReplyTo).then((object) => {
+        // make a fake activity for the reply object
+        this.in_reply_to = {type: 'Create', object: object, actor: object.attributedTo}
       })
   }
 }

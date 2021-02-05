@@ -106,6 +106,21 @@ let fetchActor = (uri) => {
   })
 }
 
+let fetchObject = (uri) => {
+  return new Promise((resolve, reject) => {
+    fetch(uri, {
+      headers: {'Accept': 'application/activity+json'}
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 export default {
-  fetchActor
+  fetchActor,
+  fetchObject,
 }
