@@ -42,8 +42,15 @@
       <div class="activity-footer">
         <div class="activity-reactions">
           <ul>
-            <li><i class="icon-star-empty"></i></li>
-            <li><i class="icon-retweet"></i></li>
+            <li>
+              <a><i class="icon-reply"></i></a>
+            </li>
+            <li>
+              <a><i class="icon-star-empty"></i></a>
+            </li>
+            <li>
+              <a><i class="icon-retweet"></i></a>
+            </li>
           </ul>
         </div>
 
@@ -161,6 +168,15 @@ export default {
 
 .activity-reactions ul :last-child {
   padding-right: 0;
+}
+
+.activity-reactions ul li a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.activity-reactions ul li a:hover {
+  color: #3366ee;
 }
 
 .activity-payload a {
