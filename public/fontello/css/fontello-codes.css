@@ -11,8 +11,11 @@
 .icon-camera:before { content: '\e809'; } /* '' */
 .icon-videocam:before { content: '\e80a'; } /* '' */
 .icon-volume-up:before { content: '\e80b'; } /* '' */
+.icon-arrows-cw:before { content: '\e80c'; } /* '' */
+.icon-link-ext:before { content: '\f08e'; } /* '' */
 .icon-mail-alt:before { content: '\f0e0'; } /* '' */
 .icon-bell-alt:before { content: '\f0f3'; } /* '' */
 .icon-quote-left:before { content: '\f10d'; } /* '' */
+.icon-reply:before { content: '\f112'; } /* '' */
 .icon-user-plus:before { content: '\f234'; } /* '' */
 .icon-user-times:before { content: '\f235'; } /* '' */
