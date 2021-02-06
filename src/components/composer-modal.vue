@@ -35,6 +35,7 @@ export default {
       source: null,
       summary: null,
       title: null,
+      inReplyTo: this.$root.showComposerModalInReplyTo,
     }
   },
   methods: {
@@ -55,6 +56,9 @@ export default {
         attributedTo: actor.data.id,
         type: 'Note',
       }
+
+      if (this.inReplyTo)
+        child_object.inReplyTo = this.inReplyTo.id
 
       let message = {
         '@context': 'https://www.w3.org/ns/activitystreams',
