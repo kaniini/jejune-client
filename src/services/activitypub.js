@@ -44,7 +44,7 @@ Actor.prototype.like = function (liked_object) {
 Actor.prototype.announce = function (announced_object) {
   let to = [
     'https://www.w3.org/ns/activitystreams#Public',
-    liked_object.attributedTo,
+    announced_object.attributedTo,
   ]
 
   let cc = [
@@ -60,7 +60,7 @@ Actor.prototype.announce = function (announced_object) {
     actor: this.data.id,
     audience: audience,
     type: 'Announce',
-    object: liked_object.id,
+    object: announced_object.id,
   }
 
   return this.pushMessageToOutbox(message)
