@@ -63,6 +63,7 @@ export default {
       actor: null,
       showComposerModal: null,
       showComposerModalInReplyTo: null,
+      showComposerModalAttachment: [],
     }
   }
 }

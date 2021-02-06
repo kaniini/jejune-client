@@ -20,6 +20,8 @@
           <div class="composer-element">
             <button type="submit" v-on:click.prevent="submit()">Post</button>
           </div>
+
+          <MediaUploader />
         </div>
       </div>
     </div>
@@ -27,8 +29,13 @@
 </template>
 
 <script>
+import MediaUploader from '@/components/media_uploader'
+
 export default {
   name: 'ComposerModal',
+  components: {
+    MediaUploader
+  },
   data() {
     return {
       error: null,
@@ -36,6 +43,7 @@ export default {
       summary: null,
       title: null,
       inReplyTo: this.$root.showComposerModalInReplyTo,
+      attachment: this.$root.showComposerModalAttachment,
     }
   },
   methods: {
@@ -60,6 +68,9 @@ export default {
       if (this.inReplyTo)
         child_object.inReplyTo = this.inReplyTo.id
 
+      if (this.attachment)
+        child_object.attachment = this.attachment
+
       let message = {
         '@context': 'https://www.w3.org/ns/activitystreams',
         to: to,
@@ -72,7 +83,7 @@ export default {
 
       actor.pushMessageToOutbox(message).then((response) => {
         if (response.status == 'accepted')
-          this.$root.showComposerModal = null
+          this.hide()
       }).catch((err) => {
         this.error = err
       })
@@ -81,6 +92,7 @@ export default {
     hide() {
       this.$root.showComposerModal = null
       this.$root.showComposerModalInReplyTo = null
+      this.$root.showComposerModalAttachment = []
     }
   }
 }
