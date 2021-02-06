@@ -16,6 +16,56 @@ Actor.prototype.iconURL = function () {
   return null
 }
 
+Actor.prototype.like = function (liked_object) {
+  let to = [
+    'https://www.w3.org/ns/activitystreams#Public',
+    liked_object.attributedTo,
+  ]
+
+  let cc = [
+    this.data.followers,
+  ]
+
+  let audience = to.concat(cc)
+
+  let message = {
+    '@context': 'https://www.w3.org/ns/activitystreams',
+    to: to,
+    cc: cc,
+    actor: this.data.id,
+    audience: audience,
+    type: 'Like',
+    object: liked_object.id,
+  }
+
+  return this.pushMessageToOutbox(message)
+}
+
+Actor.prototype.announce = function (announced_object) {
+  let to = [
+    'https://www.w3.org/ns/activitystreams#Public',
+    liked_object.attributedTo,
+  ]
+
+  let cc = [
+    this.data.followers,
+  ]
+
+  let audience = to.concat(cc)
+
+  let message = {
+    '@context': 'https://www.w3.org/ns/activitystreams',
+    to: to,
+    cc: cc,
+    actor: this.data.id,
+    audience: audience,
+    type: 'Announce',
+    object: liked_object.id,
+  }
+
+  return this.pushMessageToOutbox(message)
+}
+
 Actor.prototype.pushMessageToOutbox = function (message) {
   return new Promise((resolve, reject) => {
     let outbox_uri = this.data.outbox
