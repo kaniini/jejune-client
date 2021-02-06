@@ -120,6 +120,36 @@ Actor.prototype.fetchInbox = function () {
   })
 }
 
+Actor.prototype.uploadMediaEndpoint = function () {
+  return this.data.endpoints.uploadMedia
+}
+
+Actor.prototype.uploadMedia = function (file) {
+  return new Promise((resolve, reject) => {
+    let endpoint = this.uploadMediaEndpoint()
+    if (!endpoint)
+      reject('Media upload endpoint is not available.')
+
+    let formdata = new FormData()
+    formdata.append('file', file)
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/activity+json',
+        'Authorization': `Bearer ${this.token.access_token}`,
+      },
+      body: formdata,
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 Actor.prototype.setToken = function (token) {
   this.token = token
 }
