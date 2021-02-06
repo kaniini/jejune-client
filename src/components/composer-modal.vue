@@ -1,5 +1,5 @@
 <template>
-  <div class="composer-modal-outer" v-on:click.self="$root.showComposerModal = null">
+  <div class="composer-modal-outer" v-on:click.self="hide()">
     <div class="composer-modal-inner">
       <div class="composer-me">
         <img :src="$root.actor.iconURL()" alt="$root.actor.data.name">
@@ -72,6 +72,11 @@ export default {
       }).catch((err) => {
         this.error = err
       })
+    },
+
+    hide() {
+      this.$root.showComposerModal = null
+      this.$root.showComposerModalInReplyTo = null
     }
   }
 }

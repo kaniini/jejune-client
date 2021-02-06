@@ -62,6 +62,7 @@ export default {
     return {
       actor: null,
       showComposerModal: null,
+      showComposerModalInReplyTo: null,
     }
   }
 }
