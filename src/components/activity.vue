@@ -36,7 +36,7 @@
 
         <h2 v-html="child.name" v-if="child.name" />
         <h3 v-html="child.summary" v-if="child.summary" />
-        <div v-html="child.content" v-if="child.content" />
+        <div class="activity-payload-content" v-html="child.content" v-if="child.content" />
       </div>
 
       <div class="activity-footer">
@@ -237,7 +237,7 @@ export default {
   margin-right: 0;
 }
 
-.activity-payload * {
+.activity-payload-content * {
   max-width: 100%;
 }
 </style>
