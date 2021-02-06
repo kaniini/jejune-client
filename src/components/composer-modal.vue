@@ -17,11 +17,17 @@
             Addressing for posts is not yet implemented!  All posts are addressed to <code>as:Public</code>!
           </div>
 
-          <div class="composer-element">
-            <button type="submit" v-on:click.prevent="submit()">Post</button>
+          <div class="composer-attachments" v-if="attachment">
+            <div v-for="att in attachment" v-bind:key="att.url" class="attachment">
+              <Attachment :attachment="att" />
+            </div>
           </div>
 
           <MediaUploader />
+
+          <div class="composer-element">
+            <button type="submit" v-on:click.prevent="submit()">Post</button>
+          </div>
         </div>
       </div>
     </div>
@@ -30,10 +36,12 @@
 
 <script>
 import MediaUploader from '@/components/media_uploader'
+import Attachment from '@/components/attachment'
 
 export default {
   name: 'ComposerModal',
   components: {
+    Attachment,
     MediaUploader
   },
   data() {
@@ -142,5 +150,13 @@ export default {
 #composer-title {
   font-size: 1.5em;
   margin-bottom: 0.5em;
+}
+
+.composer-attachments {
+  display: flex;
+}
+
+.composer-attachments .attachment, .composer-attachments .attachment * {
+  max-height: 100px;
 }
 </style>
