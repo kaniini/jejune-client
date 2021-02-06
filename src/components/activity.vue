@@ -221,7 +221,7 @@ export default {
   max-height: 100%;
 }
 
-.attachment video, .attachment audio {
+.attachment img, .attachment video, .attachment audio {
   width: 100%;
   height: 100%;
 }
