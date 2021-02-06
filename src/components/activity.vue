@@ -43,13 +43,19 @@
         <div class="activity-reactions">
           <ul>
             <li>
-              <a><i class="icon-reply"></i></a>
+              <a v-on:click.prevent="reply()">
+                <i class="icon-reply"></i>
+              </a>
             </li>
             <li>
-              <a><i class="icon-star-empty"></i></a>
+              <a v-on:click.prevent="like()">
+                <i class="icon-star-empty"></i>
+              </a>
             </li>
             <li>
-              <a><i class="icon-retweet"></i></a>
+              <a v-on:click.prevent="announce()">
+                <i class="icon-retweet"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -100,6 +106,22 @@ export default {
         // make a fake activity for the reply object
         this.in_reply_to = {type: 'Create', object: object, actor: object.attributedTo}
       })
+  },
+  methods: {
+    reply() {
+      this.$root.showComposerModal = 'text'
+      this.$root.showComposerModalInReplyTo = this.child
+    },
+
+    like() {
+      let actor = this.$root.actor
+      actor.like(this.child)
+    },
+
+    announce() {
+      let actor = this.$root.actor
+      actor.announce(this.child)
+    }
   }
 }
 </script>
