@@ -169,6 +169,27 @@ Actor.prototype.oAuthEndpoints = function () {
   return obj
 }
 
+Actor.prototype.search = function (query) {
+  return new Promise((resolve, reject) => {
+    if (!this.data.endpoints.searchEndpoint)
+      reject('Search endpoint is not present for the session actor.')
+
+    let searchEndpoint = this.data.endpoints.searchEndpoint
+    fetch(`${searchEndpoint}?q=${query}`, {
+      headers: {
+        'Accept': 'application/activity+json',
+        'Authorization': `Bearer ${this.token.access_token}`,
+      }
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 var ACTOR_CACHE = {}
 
 let fetchActor = (uri) => {
