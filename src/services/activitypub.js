@@ -190,7 +190,31 @@ Actor.prototype.search = function (query) {
   })
 }
 
-var ACTOR_CACHE = {}
+Actor.prototype.fetchObject = function (uri) {
+  if (!this.data.endpoints.proxyUrl)
+    return fetchObject(uri)
+
+  return new Promise((resolve, reject) => {
+    let proxyUrl = this.data.endpoints.proxyUrl
+
+    let body = new FormData()
+    body.append('id', uri)
+
+    fetch(proxyUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.token.access_token}`,
+      },
+      body: body
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
 
 let fetchActor = (uri) => {
   return new Promise((resolve, reject) => {
@@ -199,8 +223,7 @@ let fetchActor = (uri) => {
     }).then((response) => {
       return response.json()
     }).then((response) => {
-      ACTOR_CACHE[uri] = new Actor(response)
-      resolve(ACTOR_CACHE[uri])
+      resolve(new Actor(response))
     }).catch((err) => {
       reject(err)
     })
