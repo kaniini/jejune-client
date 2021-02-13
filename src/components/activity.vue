@@ -1,18 +1,18 @@
 <template>
   <div class="activity-container">
     <div class="activity-author">
-      <a :href="actor.data.url" target="_blank" :alt="actor.data.name" v-if="actor">
-        <img :src="actor.iconURL()" class="activity-icon">
+      <a :href="actor.url" target="_blank" :alt="actor.name" v-if="actor">
+        <img :src="actor.icon.url" class="activity-icon">
       </a>
     </div>
 
     <div class="activity-content">
       <div class="activity-header" v-if="actor">
         <span class="activity-author">
-          <a :href="actor.data.url" target="_blank">{{ actor.data.name }}</a>
+          <a :href="actor.url" target="_blank">{{ actor.name }}</a>
         </span>
 
-        <span class="activity-attribution" v-if="child_actor && child_actor.data.id != actor.data.id">
+        <span class="activity-attribution" v-if="child_actor && child_actor.id != actor.id">
           <span class="activity-descriptor">
             <i class="icon-retweet" v-if="type == 'Announce'" />
             <i class="icon-mail-alt" v-if="type == 'Create'" />
@@ -20,7 +20,7 @@
           </span>
 
           <span class="activity-author">
-            <a :href="child_actor.data.url" target="_blank">{{ child_actor.data.name }}</a>
+            <a :href="child_actor.url" target="_blank">{{ child_actor.name }}</a>
           </span>
         </span>
       </div>
@@ -89,12 +89,14 @@ export default {
     }
   },
   mounted() {
-    ActivityPubService.fetchActor(this.activity.actor).then((actor) => {
+    let self = this.$root.actor
+
+    self.fetchObject(this.activity.actor).then((actor) => {
       this.actor = actor
     })
 
     if (this.child && this.child.attributedTo)
-      ActivityPubService.fetchActor(this.child.attributedTo).then((actor) => {
+      self.fetchObject(this.child.attributedTo).then((actor) => {
         this.child_actor = actor
       })
 
@@ -102,7 +104,7 @@ export default {
     // so turn it off for now
     let fetch_children = false
     if (fetch_children && this.child && this.child.inReplyTo)
-      ActivityPubService.fetchObject(this.child.inReplyTo).then((object) => {
+      self.fetchObject(this.child.inReplyTo).then((object) => {
         // make a fake activity for the reply object
         this.in_reply_to = {type: 'Create', object: object, actor: object.attributedTo}
       })
