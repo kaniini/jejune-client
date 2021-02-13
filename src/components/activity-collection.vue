@@ -1,5 +1,5 @@
 <template>
-  <Activity v-for="activity in activities" :key="activity.id" :activity="activity" />
+  <Activity v-for="activity in activities" :key="activity.id" :activity="activity" :is_reply="false" />
 </template>
 
 <script>
