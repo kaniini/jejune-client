@@ -232,6 +232,10 @@ export default {
   display: flex;
 }
 
+.activity-attachments:last-child {
+  margin-bottom: -0.75em;
+}
+
 .attachment img, .attachment video, .attachment audio {
   max-width: 100%;
   max-height: 100%;
