@@ -95,7 +95,7 @@ export default {
       actor: null,
       child_actor: null,
       in_reply_to: null,
-      interactions: 0, // XXX
+      interactions: child.interactionCount,
       announcement: announcement,
     }
   },
@@ -111,8 +111,6 @@ export default {
         this.child_actor = actor
       })
 
-    // fetching children seems to only work with some platforms, but notably not Mastodon,
-    // so turn it off for now
     let fetch_children = !this.is_reply
     if (fetch_children && this.child && this.child.inReplyTo)
       self.fetchObject(this.child.inReplyTo).then((object) => {
