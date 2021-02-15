@@ -16,6 +16,26 @@ Actor.prototype.iconURL = function () {
   return null
 }
 
+Actor.prototype.search = function (term) {
+  return new Promise((resolve, reject) => {
+    if (!this.data.endpoints.searchEndpoint)
+      reject('no search endpoint available')
+
+    fetch(`${this.data.endpoints.searchEndpoint}?q=${term}`, {
+      headers: {
+        'Accept': 'application/activity+json',
+        'Authorization': `Bearer ${this.token.access_token}`,
+      }
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 Actor.prototype.like = function (liked_object) {
   let to = [
     'https://www.w3.org/ns/activitystreams#Public',
