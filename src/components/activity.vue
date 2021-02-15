@@ -1,7 +1,7 @@
 <template>
   <div class="activity-container">
     <div class="activity-author" v-if="!is_reply">
-      <a :href="actor.url" target="_blank" :alt="actor.name" v-if="actor">
+      <a :href="actor.url" target="_blank" :title="actor.name" v-if="actor">
         <img :src="actor.icon.url" class="activity-icon">
       </a>
     </div>

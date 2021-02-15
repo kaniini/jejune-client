@@ -36,6 +36,24 @@ Actor.prototype.search = function (term) {
   })
 }
 
+Actor.prototype.follow = function (actor_id) {
+  let to = [actor_id]
+  let cc = []
+  let audience = to.concat(cc)
+
+  let message = {
+    '@context': 'https://www.w3.org/ns/activitystreams',
+    to: to,
+    cc: cc,
+    actor: this.data.id,
+    audience: audience,
+    type: 'Follow',
+    object: actor_id,
+  }
+
+  return this.pushMessageToOutbox(message)
+}
+
 Actor.prototype.like = function (liked_object) {
   let to = [
     'https://www.w3.org/ns/activitystreams#Public',
