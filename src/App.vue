@@ -64,6 +64,7 @@ export default {
       showComposerModal: null,
       showComposerModalInReplyTo: null,
       showComposerModalAttachment: [],
+      search_term: null,
     }
   }
 }

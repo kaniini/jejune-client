@@ -21,6 +21,7 @@
 
       <ul class="left-nav">
         <li><strong>Jejune</strong></li>
+        <li><SearchBox /></li>
       </ul>
     </div>
   </nav>
@@ -28,10 +29,11 @@
 
 <script>
 import UserNavAvatar from '@/components/user-nav-avatar.vue'
+import SearchBox from '@/components/search-box.vue'
 
 export default {
   name: 'NavBar',
-  components: { UserNavAvatar },
+  components: { UserNavAvatar, SearchBox },
 }
 </script>
 
