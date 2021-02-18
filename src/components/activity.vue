@@ -291,6 +291,10 @@ export default {
   border-bottom: none;
 }
 
+.activity-payload p:first-child {
+  margin-top: 0;
+}
+
 .activity-payload p:last-child {
   margin-bottom: 0;
 }
