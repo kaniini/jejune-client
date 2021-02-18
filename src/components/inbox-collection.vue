@@ -11,6 +11,7 @@ export default {
   components: { ActivityCollection },
   data() {
     return {
+      page: 0,
       activities: []
     }
   },
@@ -18,7 +19,7 @@ export default {
     if (!this.actor)
       return
 
-    this.actor.fetchInbox().then((activities) => {
+    this.actor.fetchInbox(this.page).then((activities) => {
       this.activities = activities.orderedItems.filter((activity) => {
         if (['Create', 'Announce'].indexOf(activity.type) != -1)
           return true;

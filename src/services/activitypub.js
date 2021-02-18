@@ -143,13 +143,12 @@ Actor.prototype.fetchMailboxWithToken = function (mailbox_uri) {
   })
 }
 
-Actor.prototype.fetchInbox = function () {
+Actor.prototype.fetchInbox = function (page_id) {
   return new Promise((resolve, reject) => {
     if (!this.token)
       reject('no token for fetching inbox')
 
-    // XXX: add pagination support
-    let mailbox = this.inboxURL() + '?page=0'
+    let mailbox = this.inboxURL() + `?page=${page_id}`
     this.fetchMailboxWithToken(mailbox).then((result) => {
       resolve(result)
     }).catch((err) => {
