@@ -1,4 +1,5 @@
 <template>
+  <LightBox v-if="showLightBox" :attachment="showLightBox" />
   <ComposerModal v-if="showComposerModal" />
   <NavBar v-if="actor" />
   <router-view/>
@@ -54,10 +55,11 @@ nav a.router-link-exact-active {
 <script>
 import NavBar from '@/components/nav-bar.vue'
 import ComposerModal from '@/components/composer-modal.vue'
+import LightBox from '@/components/light-box.vue'
 
 export default {
   name: 'App',
-  components: { NavBar, ComposerModal },
+  components: { NavBar, ComposerModal, LightBox },
   data() {
     return {
       actor: null,
@@ -65,6 +67,7 @@ export default {
       showComposerModalInReplyTo: null,
       showComposerModalAttachment: [],
       search_term: null,
+      showLightBox: null,
     }
   }
 }
